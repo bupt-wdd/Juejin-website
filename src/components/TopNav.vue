@@ -129,7 +129,7 @@ export default {
     height: 24px;
     margin: 0 3px;
 }
-@media screen and (max-width: 1350px){
+@media screen and (max-width: 720px){
     .memberVip{
         display: none;
     }

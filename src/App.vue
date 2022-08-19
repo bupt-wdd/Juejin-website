@@ -1,22 +1,21 @@
 <script>
-import TopNav from './components/TopNav.vue'
-export default{
+import TopNav from "./components/TopNav.vue";
+
+export default {
   components: {
-    TopNav
+    TopNav,
   },
   /*
   mounted(){
     this.$store.dispatch('getJuejin')
   }
   */
-}
+};
 </script>
 
 <template>
-<TopNav></TopNav>
-<router-view></router-view>
+  <!-- <TopNav></TopNav> -->
+  <router-view></router-view>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -45,7 +45,8 @@ export default {
             }else{
                 mainTop.className = 'main-top'
             }
-        }
+        },
+
     },
     mounted(){
         window.addEventListener('scroll', this.toTop, true)
