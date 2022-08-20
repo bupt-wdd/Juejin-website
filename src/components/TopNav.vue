@@ -19,7 +19,7 @@ export default {
             }else{
                 container.classList = 'container visible'
             }
-        }
+        },
     },
     mounted(){
         window.addEventListener('scroll', this.judgeTop, true)
@@ -56,7 +56,7 @@ export default {
     </header>
 </div>
 </template>
-<style>
+<style  scoped>
 .container{
     width: 100%;
     border-bottom: 1px solid #f1f1f1;

@@ -15,7 +15,7 @@ export default {
 </div>
     
 </template>
-<style>
+<style  scoped>
 .content-container{
     max-width: 960px;
     margin: 110px auto;

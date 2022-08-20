@@ -1,6 +1,12 @@
 <script>
 export default {
     props:['cardLists'],
+    methods:{
+        close: function(){
+            const div = document.querySelector('.card-container')
+            div.style.display = 'none'
+        }
+    }
 }
 </script>
 <template>
@@ -9,13 +15,13 @@ export default {
         <ul class="information-show">
             <li class="article-writer">{{cardLists.writer}}</li>
             <div class="dividing">|</div>
-            <li>{{cardLists.date}}前</li>
-            <span class="close" v-if="cardLists.articleAdver==0"><svg t="1660116590359" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2673" width="200" height="200"><path d="M556.8 512L832 236.8c12.8-12.8 12.8-32 0-44.8-12.8-12.8-32-12.8-44.8 0L512 467.2l-275.2-277.333333c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l275.2 277.333333-277.333333 275.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.933333 8.533333 23.466666 8.533333s17.066667-2.133333 23.466667-8.533333L512 556.8 787.2 832c6.4 6.4 14.933333 8.533333 23.466667 8.533333s17.066667-2.133333 23.466666-8.533333c12.8-12.8 12.8-32 0-44.8L556.8 512z" p-id="2674" fill="#86909c"></path></svg></span>
+            <li>{{cardLists.date.slice(0, 10)}}</li>
+            <span class="close" v-if="cardLists.articleAdver==0" @click.stop="close"><svg t="1660116590359" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2673" width="200" height="200"><path d="M556.8 512L832 236.8c12.8-12.8 12.8-32 0-44.8-12.8-12.8-32-12.8-44.8 0L512 467.2l-275.2-277.333333c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l275.2 277.333333-277.333333 275.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.933333 8.533333 23.466666 8.533333s17.066667-2.133333 23.466667-8.533333L512 556.8 787.2 832c6.4 6.4 14.933333 8.533333 23.466667 8.533333s17.066667-2.133333 23.466666-8.533333c12.8-12.8 12.8-32 0-44.8L556.8 512z" p-id="2674" fill="#86909c"></path></svg></span>
             <span class="show-adver" v-else>广告</span>
         </ul>
         <div class="article-box">
             <div class="box">
-                <div class="article-title"><a :href="cardLists.articleUrl">{{cardLists.title}}</a></div>
+                <div class="article-title"><a>{{cardLists.title}}</a></div>
                 <div class="article-content">{{cardLists.record}}</div>
                 <ul class="article-footer" v-if="cardLists.articleAdver==0">
                     <li class="footer-item">
@@ -40,7 +46,7 @@ export default {
 
 </div>
 </template>
-<style>
+<style  scoped>
 .card-container{
     width: 100%;
 }
@@ -52,6 +58,10 @@ export default {
     padding-bottom: none;
     background-color: #fff;
     border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+}
+.card-item:hover{
+    background-color: #fbfbfb;
 }
 .information-show{
     position: relative;
@@ -140,7 +150,7 @@ export default {
     display: block;
 }
 .footer-item span{
-    margin-left: 22px;
+    margin-left: 6px;
 }
 .article-box{
     display: flex;

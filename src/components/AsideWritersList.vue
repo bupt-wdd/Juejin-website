@@ -50,7 +50,7 @@ export default {
         <div class="writer-btn"><span>完整榜单</span></div>
     </div>
 </template>
-<style>
+<style  scoped>
 .writer-list{
     width: 100%;
     box-sizing: border-box;

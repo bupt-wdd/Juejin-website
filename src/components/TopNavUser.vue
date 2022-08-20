@@ -10,7 +10,7 @@ export default {
 <template>
     <div class="userHead"></div>
 </template>
-<style>
+<style scoped>
 .userHead{
     width: 30px;
     height: 30px;

@@ -14,9 +14,38 @@ export default {
     methods:{
         changeSort: function(index){
             this.activeSort = index
-        }
+        },
+        handleScroll: function(){
+            // 变量 scrollHeight 是滚动条的总高度
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+
+            // 变量 windowHeight 是可视区的高度
+            const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+
+            // 变量scrollTop为当前页面的滚动条纵坐标位置
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            // 滚动条到底部得距离 = 滚动条的总高度 - 可视区的高度 - 当前页面的滚动条纵坐标位置
+            let scrollBottom = scrollHeight - windowHeight - scrollTop
+            if(scrollBottom <= 300){
+                this.$store.dispatch('getArticleInfo')
+            }
+        },
+        intoArticle: function(id){
+            this.$router.push({
+                path: '/articles',
+                query:{
+                    id: id
+                },
+
+            })
+        },
     },
     computed:mapState(['usersLists']),
+    mounted(){
+        this.$store.dispatch('getArticleInfo')
+        window.addEventListener('mousewheel', this.handleScroll)
+
+    }
 }
 </script>
 <template>
@@ -25,9 +54,8 @@ export default {
         <ul class="list-sort">
             <li v-for="(item, index) in sortItem" :key="index" :class="index==activeSort?'active':''" @click="changeSort(index)">{{item}}</li>
         </ul>
-        <li v-for="item in usersLists" :key="item" ><Card :cardLists="item"></Card></li>
+        <li v-for="item in usersLists" :key="item" @click.stop="intoArticle(item.id)"><Card :cardLists="item"></Card></li>
     </ul>
-    
 </div>
 </template>
 <style>

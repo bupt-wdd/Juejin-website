@@ -19,7 +19,7 @@ export default {
 </form>
 </template>
 
-<style>
+<style  scoped>
 #search{
     width: calc(100% - 40px);
     border: 1px solid #c2c8d1;

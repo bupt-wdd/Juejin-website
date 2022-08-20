@@ -56,12 +56,11 @@ export default {
 <div class="main-top">
     <ul class="main-top-nav">
         <li v-for="(item, index) in lists" :key="index" :class="itemIndex==index?'active':''"><a :href=lists[index].TopUrl>{{item.title}}</a></li>
-        <li class="control"><a>标签管理</a></li>
     </ul>
     
 </div>
 </template>
-<style>
+<style  scoped>
 .main-top{
     display: flex;
     align-items: flex-end;
@@ -94,10 +93,5 @@ export default {
 }
 .main-top-nav li a:hover{
     color: #1e80ff;
-}
-.main-top-nav .control{
-    cursor: pointer;
-    margin-left: auto;
-    justify-self: flex-end;
 }
 </style>

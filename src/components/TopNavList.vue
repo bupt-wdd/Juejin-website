@@ -54,7 +54,7 @@ export default {
     <li v-for="(item, index) in lists" :key="index" :class="activeIndex==index?'active':'' " @click="switchModule(index)"><router-link :to="item.listUrl">{{item.title}}</router-link></li>
 </ul>
 </template>
-<style>
+<style  scoped>
 .left-nav-list{
     display: flex;
     flex-direction: row;
