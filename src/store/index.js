@@ -28,7 +28,17 @@ const store = createStore({
                 context.commit('mGetArticleInfo', str)
             });
             */
-           axios.get('/path/findAll').then((res)=>{
+           const pageNum = context.state.count;
+           const pageSize = 20
+           axios({
+            url: '/path/findBySequence',
+            method: 'get',
+            params:{
+                pageNum: pageNum,
+                pageSize: pageSize
+            }
+
+            }).then((res)=>{
                 if(res.status != 200) return alert('数据获取失败')
                 const str = res.data.entity
                 console.log(str);
