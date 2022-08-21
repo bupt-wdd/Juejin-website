@@ -58,12 +58,10 @@ export default {
 
 <style>
 .comment-text {
-  /* position: absolute; */
   position: relative;
   width: 820px;
-  /* top: 84px; */
   margin-top: 20px;
-  top: -420px;
+  top: -1150px;
   right: 420px;
   height: auto;
   padding: 40px;
@@ -76,7 +74,6 @@ export default {
   color: grey;
   display: flex;
   margin-top: 30px;
-  /* padding-bottom: 20px; */
 }
 .user-info {
   display: flex;
@@ -85,7 +82,6 @@ export default {
   height: 48px;
   font-size: 13px;
   margin-left: 20px;
-  /* margin-top: -5px; */
 }
 .comment-input {
   margin-left: 20px;

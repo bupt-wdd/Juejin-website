@@ -1,17 +1,16 @@
 <script>
-import { debounce } from "lodash";
+// import { debounce } from "lodash";
+import { throttle } from "lodash";
 
 let currHeight = 0;
 let activeIndex = 0;
 let prevIndex = 0;
 
-// let flag = false;
-
 export default {
+  props: ["articleContent"],
   created() {
     this.h1Tags = this.captureTags();
   },
-  props: ["articleContent"],
   data() {
     return {
       h1Tags: [],
@@ -24,9 +23,9 @@ export default {
   methods: {
     captureTags() {
       let tags = document.querySelectorAll(".content h1");
-      // get height of the tags
+
       for (let i = 0; i < tags.length; i++) {
-        this.tagHeights.push(tags[i].offsetTop);
+        this.tagHeights.push(tags[i].offsetTop);  // get height of the tags
       }
       return tags;
     },
@@ -55,9 +54,8 @@ export default {
 
       // initialize the data of catalogs
       if (!this.flag) {
-        // rerun
         this.catalogs = document.querySelectorAll(".h1tag");
-        console.log(this.flag);
+        // console.log(this.flag);
         this.flag = true;
       }
 
@@ -76,13 +74,14 @@ export default {
     },
   },
   mounted() {
+    // get h1 tags
     this.h1Tags = this.captureTags();
     // get <li> tags in the catalog
     this.catalogs = document.querySelectorAll(".h1tag");
 
     window.addEventListener(
       "scroll",
-      debounce(this.updateHighlight, 300),
+      throttle(this.updateHighlight, 300),
       true
     );
   },

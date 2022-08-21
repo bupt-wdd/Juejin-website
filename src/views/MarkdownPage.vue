@@ -73,6 +73,5 @@ export default {
     :onSave="saveToDraftHandler"
   />
   <MarkdownToolbar />
-  <!-- <div v-html="output"></div> -->
   <MarkdownEditor v-model:inputContent="inputContent" />
 </template>

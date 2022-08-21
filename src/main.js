@@ -6,11 +6,10 @@ import store from "./store";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
-// import * as MarkdownItToc from "vue-markdown-it-toc";
+
 
 const app = createApp(App);
 app.use(ElementPlus).use(router).use(store);
-// app.use(MarkdownItToc);
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);

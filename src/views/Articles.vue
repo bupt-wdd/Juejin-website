@@ -2,6 +2,7 @@
 import { mapState } from 'vuex';
 import TopNav from "../components/TopNav.vue";
 import DetailPage from "../components/DetailPage.vue";
+
 export default{
     components: {
         DetailPage,

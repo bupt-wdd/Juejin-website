@@ -7,6 +7,7 @@ import DetailComments from "./DetailComments.vue";
 export default {
   data() {
     return {
+      refreshed: false,
       authorName: "摸鱼的汤姆",
       publishDate: new Date().toLocaleString(),
       articleTitle: "前端请装上这个Chrome插件",
@@ -80,7 +81,7 @@ def detail(request, pk):
     DetailContent,
     ArticleSideButtons,
     DetailComments,
-  }
+  },
 };
 </script>
 
@@ -88,7 +89,10 @@ def detail(request, pk):
   <ArticleSideButtons />
 
   <div class="article-page">
-    <DetailAside :articleContent="articleContent" />
+    <DetailAside
+      :articleContent="articleContent"
+      v-model:refreshed="refreshed"
+    />
     <DetailContent
       :articleTitle="articleTitle"
       :articleContent="articleContent"
