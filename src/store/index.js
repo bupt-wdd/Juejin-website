@@ -6,7 +6,7 @@ const store = createStore({
         return {
             usersLists:[],
             count: 0,
-            cardList: {}
+            cardList: {},
         }
     },
     mutations:{
@@ -16,7 +16,7 @@ const store = createStore({
         },
         mGetArticleById: function(state, obj){
             state.cardList = obj
-        }
+        },
     },
     actions:{
         getArticleInfo: function(context){
@@ -47,7 +47,6 @@ const store = createStore({
         },
         getArticleById: function(context, idU){
             const id = parseInt(idU.id)
-            console.log(typeof(id));
             axios({
                 url: '/path/findById',
                 method: 'get',
@@ -56,7 +55,6 @@ const store = createStore({
                 }
             }).then(res=>{
                 const obj = res.data.entity;
-                console.log(res.data.entity);
                 context.commit('mGetArticleById', obj)
             }).catch(error=>{
                 console.log(error);

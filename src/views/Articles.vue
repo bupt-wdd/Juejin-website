@@ -1,6 +1,12 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+import TopNav from "../components/TopNav.vue";
+import DetailPage from "../components/DetailPage.vue";
 export default{
+    components: {
+        DetailPage,
+        TopNav,
+    },
     data(){
         return {
             id: this.$route.query.id,
@@ -16,12 +22,8 @@ export default{
 }
 </script>
 <template>
-    <div class="article">
-        {{cardList}}
-    </div>
+    <DetailPage />
 </template>
 <style scoped>
-.article{
-    margin: 80px;
-}
+
 </style>

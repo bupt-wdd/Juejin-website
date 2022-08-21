@@ -19,7 +19,7 @@ export default {
             }else{
                 container.classList = 'container visible'
             }
-        },
+        }
     },
     mounted(){
         window.addEventListener('scroll', this.judgeTop, true)
