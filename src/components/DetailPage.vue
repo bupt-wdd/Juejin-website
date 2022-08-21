@@ -91,7 +91,6 @@ def detail(request, pk):
   <div class="article-page">
     <DetailAside
       :articleContent="articleContent"
-      v-model:refreshed="refreshed"
     />
     <DetailContent
       :articleTitle="articleTitle"
