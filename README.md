@@ -1,6 +1,3 @@
-# 掘金官网
+# Juejin-website
 
-## Vite + vue
-
-vue-router
-vuex
+字节青训营前端项目
