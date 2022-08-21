@@ -1,5 +1,5 @@
 <script>
-// import { debounce } from "lodash";
+import { debounce } from "lodash";
 import { throttle } from "lodash";
 
 let currHeight = 0;
@@ -81,7 +81,7 @@ export default {
 
     window.addEventListener(
       "scroll",
-      throttle(this.updateHighlight, 300),
+      debounce(this.updateHighlight, 300),
       true
     );
   },
