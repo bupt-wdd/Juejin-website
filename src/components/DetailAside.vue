@@ -59,6 +59,14 @@ export default {
         this.flag = true;
       }
 
+      // refresh if appeared duplicated tags
+      const activedNum1 = document.querySelectorAll('.content-active').length;
+      const activedNum2 = document.querySelectorAll('.h1tag-activedTag').length;
+      if (activedNum1 >= 2 || activedNum2 >= 2){
+        console.log(activedNum1, activedNum2);
+        location.reload();
+      }
+
       if (currIndex !== prevIndex) {
         // reverse prev
         this.h1Tags[prevIndex].classList = "content";
