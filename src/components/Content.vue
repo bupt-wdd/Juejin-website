@@ -8,27 +8,44 @@ export default {
     data(){
         return {
             activeSort: 0,
-            sortItem: ['推荐', '最新', '热榜'],
+            sortItem: ['默认', '最新', '热榜'],
         }
     },
     methods:{
         changeSort: function(index){
+            const temp = this.activeSort;
             this.activeSort = index
+            if( this.activeSort != temp){
+                this.$store.dispatch({
+                    type: 'getArticleInfo',
+                    sort: this.activeSort,
+                    clearU : 1,
+                })
+            }
+            
         },
         handleScroll: function(){
-            // 变量 scrollHeight 是滚动条的总高度
-            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+            if(this.dataNum){
+                // 变量 scrollHeight 是滚动条的总高度
+                const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
 
-            // 变量 windowHeight 是可视区的高度
-            const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+                // 变量 windowHeight 是可视区的高度
+                const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
 
-            // 变量scrollTop为当前页面的滚动条纵坐标位置
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-            // 滚动条到底部得距离 = 滚动条的总高度 - 可视区的高度 - 当前页面的滚动条纵坐标位置
-            let scrollBottom = scrollHeight - windowHeight - scrollTop
-            if(scrollBottom <= 300){
-                this.$store.dispatch('getArticleInfo')
+                // 变量scrollTop为当前页面的滚动条纵坐标位置
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+                // 滚动条到底部得距离 = 滚动条的总高度 - 可视区的高度 - 当前页面的滚动条纵坐标位置
+                let scrollBottom = scrollHeight - windowHeight - scrollTop
+                if(scrollBottom <= 300){
+                    this.$store.dispatch({
+                        type: 'getArticleInfo',
+                        sort: this.activeSort,
+                        clearU: 0
+                    })
+                }  
             }
+
+
         },
         intoArticle: function(id){
             this.$router.push({
@@ -39,10 +56,27 @@ export default {
 
             })
         },
+        throttle: function(func, delay){
+            let timer = null;
+            return function(...args){
+                if(!timer){
+                    timer=setTimeOut(()=>{
+                        func.apply(this,args)
+                        timer=null
+                    },delay)    
+                }
+            }
+
+        }
     },
-    computed:mapState(['usersLists']),
+    computed:mapState(['usersLists', 'dataNum']),
     mounted(){
-        this.$store.dispatch('getArticleInfo')
+        this.$store.dispatch({
+            type: 'getArticleInfo',
+            sort: this.activeSort,
+            clearU: 0
+        })
+
         window.addEventListener('mousewheel', this.handleScroll)
 
     }
@@ -52,13 +86,17 @@ export default {
 <div class="content">
     <ul class="article">
         <ul class="list-sort">
-            <li v-for="(item, index) in sortItem" :key="index" :class="index==activeSort?'active':''" @click="changeSort(index)">{{item}}</li>
+            <li v-for="(item, index) in sortItem" :key="index" :class="index==activeSort?'active':''" @click="throttle(changeSort(index), 8000)">{{item}}</li>
         </ul>
         <li v-for="item in usersLists" :key="item" @click.stop="intoArticle(item.id)"><Card :cardLists="item"></Card></li>
     </ul>
+    <div class="footer">
+        <p>——  到底啦  ——</p>
+    </div>
+    
 </div>
 </template>
-<style>
+<style scoped>
 .content{
     width: 100%;
 }
@@ -83,5 +121,11 @@ export default {
 }
 .list-sort li.active{
     color: #1e80ff;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    margin: 60px;
+    color: #909090;
 }
 </style>
