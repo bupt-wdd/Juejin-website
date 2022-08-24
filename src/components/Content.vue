@@ -12,10 +12,20 @@ export default {
         }
     },
     methods:{
+        debounce(fn, delay) {
+        let timer = null; // 借助闭包
+            return function () {
+                if (timer) {
+                clearTimeout(timer);
+                }
+                timer = setTimeout(fn, delay); // 简化写法
+            };
+        },
         changeSort: function(index){
             const temp = this.activeSort;
             this.activeSort = index
             if( this.activeSort != temp){
+
                 this.$store.dispatch({
                     type: 'getArticleInfo',
                     sort: this.activeSort,
@@ -77,7 +87,7 @@ export default {
             clearU: 0
         })
 
-        window.addEventListener('mousewheel', this.handleScroll)
+        window.addEventListener('mousewheel', this.debounce(this.handleScroll, 50))
 
     }
 }
@@ -86,7 +96,7 @@ export default {
 <div class="content">
     <ul class="article">
         <ul class="list-sort">
-            <li v-for="(item, index) in sortItem" :key="index" :class="index==activeSort?'active':''" @click="throttle(changeSort(index), 8000)">{{item}}</li>
+            <li v-for="(item, index) in sortItem" :key="index" :class="index==activeSort?'active':''" @click="debounce(changeSort(index), 50)()">{{item}}</li>
         </ul>
         <li v-for="item in usersLists" :key="item" @click.stop="intoArticle(item.id)"><Card :cardLists="item"></Card></li>
     </ul>
